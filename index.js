@@ -13,7 +13,7 @@ function addComment()
 {
 ++totalComments;
 var c= Object.create(comments);
-c.id=totalComments;
+c.id=Math.random().toString(36).slice(2);
 c.author="Rahul";
 c.comment=document.getElementById('newComment').value;
 c.reply={};
@@ -25,47 +25,45 @@ createNewComment(c);
 
 function deleteComment(id)
 {
-var list = document.getElementsByClassName('comments');
-console.log(list);
-list.removeChild(list.childNode[id]);
-allComments.splice(id-1,1);
-console.log(allComments);
 
+ var c= allComments.find(element=>element.id===id);
+console.log(c.id);
+
+allComments.splice(id-1,1);
+document.getElementById(id).remove();
 }
 
 function replyComment(id)
 {
-console.log(allComments[id-1]);
+ console.log(allComments[id-1]);
 }
 
 function createNewComment(c)
 {
   var newComment= document.createElement("P");
   newComment.innerHTML=c.comment;
-  newComment.class=totalComments;
+  newComment.setAttribute("id",c.id);
   document.getElementById('comments').appendChild(newComment);
-
-  console.log(totalComments);
+  addBttn(newComment.id);
 }
 
 function addBttn(id)
 {
   var del = document.createElement("BUTTON");
   del.innerHTML="Delete";
-  del.value=totalComments;
+  del.setAttribute("id",Math.random().toString(36).slice(2));
   del.addEventListener("click", function(){
-    return deleteComment(del.value);
+    return deleteComment(id);
   });
   document.getElementById(id).appendChild(del);
   var reply = document.createElement("BUTTON");
   reply.innerHTML= "Reply";
-  reply.value=totalComments;
+  reply.setAttribute("id",Math.random().toString(36).slice(2));
   reply.addEventListener("click", function ()
   {
     var replyInput= document.createElement("INPUT");
     document.getElementById(id).appendChild(replyInput);
-
-   return replyComment(reply.value);
+    return replyComment(reply.value);
   });
   document.getElementById(id).appendChild(reply);
 }
