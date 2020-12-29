@@ -25,17 +25,21 @@ createNewComment(c);
 
 function deleteComment(id)
 {
-
  var c= allComments.find(element=>element.id===id);
-console.log(c.id);
 
-allComments.splice(id-1,1);
+allComments.splice(allComments.indexOf(c),1);
 document.getElementById(id).remove();
+console.log(allComments);
 }
+
 
 function replyComment(id)
 {
- console.log(allComments[id-1]);
+var c=allComments.find(element=>element.id===id);
+console.log(c);
+var x;
+x=addInput(id,x)
+
 }
 
 function createNewComment(c)
@@ -61,9 +65,39 @@ function addBttn(id)
   reply.setAttribute("id",Math.random().toString(36).slice(2));
   reply.addEventListener("click", function ()
   {
-    var replyInput= document.createElement("INPUT");
-    document.getElementById(id).appendChild(replyInput);
-    return replyComment(reply.value);
+      return replyComment(id);
   });
   document.getElementById(id).appendChild(reply);
+}
+
+function addInput(id,r)
+{
+  var input= document.createElement("INPUT");
+  input.setAttribute("placeholder","Type Something...");
+  document.getElementById(id).appendChild(input);
+  var addBttn= document.createElement("BUTTON");
+  addBttn.innerHTML= "Add";
+  addBttn.addEventListener("click",function(){
+    return replied(id,input.value);
+  })
+  document.getElementById(id).appendChild(addBttn);
+  return r;
+
+}
+
+function replied(id,input)
+{
+var x= allComments.find(element=>{
+  if(element.id===id)
+  {
+    var c= Object.create(comments);
+    c.id=Math.random().toString(36).slice(2);
+    c.comment=input;
+    element.reply=c;
+    }
+    return element;
+});
+console.log(x.reply);
+createNewComment(x.reply);
+console.log(allComments);
 }
