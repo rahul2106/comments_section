@@ -1,4 +1,6 @@
 const comments={
+
+
   id:'',
   author: '',
   timestamp:'',
@@ -72,14 +74,7 @@ function addBttn(id)
 
 function addInput(id,r)
 {
-  var input= document.createElement("INPUT");
-  input.setAttribute("placeholder","Type Something...");
-  document.getElementById(id).appendChild(input);
-  var addBttn= document.createElement("BUTTON");
-  addBttn.innerHTML= "Add";
-  addBttn.addEventListener("click",function(){
-    return replied(id,input.value);
-  })
+  var input="<div class=""inputReply""><input type=""text"">"
   document.getElementById(id).appendChild(addBttn);
   return r;
 
@@ -100,4 +95,6 @@ var x= allComments.find(element=>{
 console.log(x.reply);
 createNewComment(x.reply);
 console.log(allComments);
+var element=document.getElementsByClassName("temp");
+element.parentNode.removeChild(element);
 }

@@ -10,13 +10,14 @@
 <body>
 
 <input type="text" name="" value="" placeholder="Type Something.." id = "newComment">
-<button type="button" name="button" value="NewComment" onclick="addComment()"> Add</button>
+<button type="button" name="button" value="NewComment" onclick="addComment(newComment.value)"> Add</button>
 <div id="comments" class = "comments">
-
+<ul id = "allComments">
+</ul>
 
 </div>
 
-  <script src="./index.js" charset="utf-8"></script>
+  <script src="./comments.js" charset="utf-8"></script>
 </body>
 
 </html>
