@@ -15,7 +15,8 @@ function addComment(comment){
   allComments.push(c);
 
   console.log(allComments);
-
+  var uli= document.getElementById('allComments');
+  uli.innerHTML='';
   createComment(allComments,'allComments');
 }
 
@@ -24,6 +25,7 @@ function reply(comment,item){
   r.id=Math.random().toString(36).slice(2);
   r.comment=comment;
   r.reply=[];
+
  item.reply.push(r);
  console.log(item);
 document.getElementById("div_"+item.id).remove();
@@ -70,9 +72,11 @@ function createButton(item){
   var id= item.id;
   var delBtn = document.createElement("BUTTON");
   delBtn.setAttribute("id",id);
+  delBtn.setAttribute("class","btn btn-outline-danger");
   delBtn.innerHTML = "DELETE";
   delBtn.addEventListener("click",function(){
     document.getElementById(id).remove();
+    console.log(item);
   });
   document.getElementById(id).appendChild(delBtn);
 
@@ -82,7 +86,9 @@ function createButton(item){
   repBtn.addEventListener("click",function(){
     var div = document.createElement('div');
     div.setAttribute("id","div_"+id);
+    div.setAttribute("class","input-group");
     var inp =document.createElement("INPUT");
+    inp.setAttribute("class","form-control");
     var addBtn = document.createElement("BUTTON");
     addBtn.innerHTML= "Add";
     addBtn.addEventListener("click",function(){
@@ -95,5 +101,31 @@ function createButton(item){
 
   });
   document.getElementById(id).appendChild(repBtn);
+
+}
+
+
+function createHome(){
+var div = document.createElement('div');
+div.setAttribute("class","input-group");
+document.getElementById('container').appendChild(div);
+
+var inp= document.createElement('input');
+inp.setAttribute("class","form-control");
+inp.setAttribute("id","newComment");
+inp.setAttribute("placeholder","Type Here..");
+inp.setAttribute("aria-describedby","basic-addon1");
+div.appendChild(inp);
+var _btnDiv = document.createElement('div');
+_btnDiv.setAttribute("class","input-group-append btnp");
+div.appendChild(_btnDiv);
+var btn= document.createElement('button');
+btn.innerHTML= "Comment";
+
+btn.addEventListener("click",function(){
+  addComment(newComment.value);
+});
+_btnDiv.appendChild(btn);
+
 
 }

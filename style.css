@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  margin-top: 1%;
+}
+#btnp{
+  padding: 1%;
+margin:10%
+}
+
+.addBtn{
+  color: green;
+  background-color: white;
+  border: none;
+  padding-top: 10%
+}
